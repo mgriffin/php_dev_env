@@ -11,6 +11,7 @@ user 'mike'
 include_recipe "apt"
 include_recipe "mysql::server"
 include_recipe "database"
+include_recipe "nginx"
 
 mysql_database "lvac" do
   connection({
@@ -19,4 +20,13 @@ mysql_database "lvac" do
     :password => node["mysql"]["server_root_password"]
   })
   action :create
+end
+
+template "#{node['nginx']['dir']}/sites-available/lvac" do
+  source "lvac_nginx"
+  notifies :restart, "service[nginx]"
+end
+
+nginx_site "lvac" do
+  enable true
 end
