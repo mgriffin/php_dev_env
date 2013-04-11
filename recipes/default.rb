@@ -22,6 +22,11 @@ mysql_database "lvac" do
   action :create
 end
 
+directory "/var/www/lvac/current" do
+  action :create
+  recursive true
+end
+
 template "#{node['nginx']['dir']}/sites-available/lvac" do
   source "lvac_nginx"
   notifies :restart, "service[nginx]"
