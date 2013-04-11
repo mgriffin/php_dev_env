@@ -7,3 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 user 'mike'
+
+include_recipe "apt"
+include_recipe "mysql::server"
