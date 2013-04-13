@@ -6,6 +6,15 @@
 # 
 # All rights reserved - Do Not Redistribute
 #
+include_recipe "apt"
+include_recipe "zsh"
+include_recipe "mysql::server"
+include_recipe "database::mysql"
+include_recipe "nginx"
+include_recipe "php-fpm"
+include_recipe "git"
+include_recipe "vim"
+
 group node[:lvac][:group]
 
 user node[:lvac][:user] do
@@ -13,13 +22,6 @@ user node[:lvac][:user] do
   system true
   shell "/bin/zsh"
 end
-
-include_recipe "apt"
-include_recipe "zsh"
-include_recipe "mysql::server"
-include_recipe "database::mysql"
-include_recipe "nginx"
-include_recipe "php-fpm"
 
 mysql_database "lvac" do
   connection({
@@ -51,4 +53,9 @@ end
 
 nginx_site "lvac" do
   enable true
+end
+
+package "php5-mysql" do
+  action :install
+  notifies :restart, "service[nginx]"
 end
