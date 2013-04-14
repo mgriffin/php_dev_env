@@ -73,11 +73,20 @@ Vagrant.configure("2") do |config|
         :server_root_password => 'rootpass',
         :server_debian_password => 'debpass',
         :server_repl_password => 'replpass'
+      },
+      :mike => {
+        :user => "mike",
+        :group => "mike",
+        :public_key => IO.read(File.expand_path("~/.ssh/id_rsa.pub")),
+        :private_key => IO.read(File.expand_path("~/.ssh/id_rsa"))
       }
     }
 
     chef.run_list = [
       "recipe[lvac::default]"
+      "recipe[lvac::mike]"
+      "recipe[lvac::database]"
+      "recipe[lvac::webserver]"
     ]
   end
 end
