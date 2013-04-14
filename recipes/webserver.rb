@@ -19,9 +19,20 @@ template "#{node['nginx']['dir']}/sites-available/lvac" do
   notifies :restart, "service[nginx]"
 end
 
-directory "/var/www/lvac/current" do
+directory "/var/www/lvac" do
+  owner node[:mike][:user]
+  group node[:mike][:group]
+  mode "0755"
   action :create
   recursive true
+end
+
+git "/var/www/lvac/current" do
+  repository "git@github.com:mgriffin/lvac.git"
+  reference "master"
+  user node[:mike][:user]
+  group node[:mike][:group]
+  action :sync
 end
 
 nginx_site "lvac" do
