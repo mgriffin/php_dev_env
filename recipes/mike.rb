@@ -11,6 +11,7 @@ home_dir = "/home/#{node[:mike][:user]}"
 
 include_recipe "git"
 include_recipe "vim"
+include_recipe "composer"
 
 group node[:mike][:group]
 

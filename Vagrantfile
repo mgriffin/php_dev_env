@@ -83,9 +83,9 @@ Vagrant.configure("2") do |config|
     }
 
     chef.run_list = [
-      "recipe[lvac::default]"
-      "recipe[lvac::mike]"
-      "recipe[lvac::database]"
+      "recipe[lvac::default]",
+      "recipe[lvac::mike]",
+      "recipe[lvac::database]",
       "recipe[lvac::webserver]"
     ]
   end
