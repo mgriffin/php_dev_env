@@ -43,3 +43,8 @@ package "php5-mysql" do
   action :install
   notifies :restart, "service[nginx]"
 end
+
+package "php5-curl" do
+  action :install
+  notifies :restart, "service[nginx]"
+end
