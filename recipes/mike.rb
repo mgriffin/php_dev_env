@@ -19,6 +19,7 @@ user node[:mike][:user] do
   group node[:mike][:group]
   home "#{home_dir}"
   supports :manage_home=>true
+  shell "/bin/bash"
 end
 
 directory "#{home_dir}/.ssh" do
