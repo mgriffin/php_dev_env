@@ -48,3 +48,8 @@ package "php5-curl" do
   action :install
   notifies :restart, "service[nginx]"
 end
+
+package "php5-gd" do
+  action :install
+  notifies :restart, "service[nginx]"
+end
