@@ -23,6 +23,13 @@ user node[:mike][:user] do
   shell "/bin/bash"
 end
 
+template "#{home_dir}/.bashrc" do
+  owner node[:mike][:user]
+  group node[:mike][:group]
+  mode "0644"
+  source "bashrc"
+end
+
 directory "#{home_dir}/.ssh" do
   owner node[:mike][:user]
   group node[:mike][:group]
